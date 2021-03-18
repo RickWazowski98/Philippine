@@ -1,0 +1,323 @@
+googlesheets:
+  file: prototype-310ad5395ace.json
+  name: Philippine condos
+  sheet1: Projects tab for Sergei
+  sheet2: Provinces/cities/areas tab for Sergei
+  name_sheet_pricing_real_estate: Pricing - Real Estate Data
+  tab_pricing_real_estate: Sergio
+  test_tab_pricing_real_estate : Dev_Sergei
+  dt_sheets_load_range_bulk_1: A2
+  dt_sheets_load_range_bulk_1_end: E9999
+  dt_sheets_load_range_bulk_2: H2
+  dt_sheets_load_range_bulk_2_end: H9999
+  dt_sheets_load_range_bulk_3: L2
+  dt_sheets_load_range_bulk_3_end: AY9999
+  dt_sheets_load_range_bulk_3_4: CH2
+  dt_sheets_load_range_bulk_3_4_end: CI9999
+  dt_sheets_load_range_bulk_3_5: CM2
+  dt_sheets_load_range_bulk_3_5_end: CM9999
+  dt_sheets_identifer_trigger_end_part1: AZ2
+  dt_sheets_load_range_bulk_4: BO2
+  dt_sheets_load_range_bulk_4_end: BY9999
+  dt_sheets_load_range_bulk_5: CB2
+  dt_sheets_load_range_bulk_5_end: CC9999
+  dt_sheets_load_range_bulk_6: CJ2
+  dt_sheets_load_range_bulk_6_end: CK9999 
+  dt_sheets_col_target_locations_1: 61
+  dt_sheets_copy_paste_location_clear_start: BJ2
+  dt_sheets_copy_paste_location_clear_end: BJ9999
+  dt_sheets_copy_paste_location_urls: 62
+  dt_sheets_location_urls: 63
+  dt_sheets_col_target_URLs_2: 79
+  dt_sheets_col_target_month_1: 27
+  dt_sheets_col_target_month_2: 25
+mappings_tabs:
+  sheet_name: Dot Property Data - Real Estate Data
+  Thailand condominiums:
+    tab_name: Thailand condominiums
+    domain: dotproperty.co.th
+    filter_row: 5
+    file_proj_urls: links_th_condo
+    file_data_bulk_1: projects_data_th_condo_result_bulk_1
+    file_data_bulk_2: projects_data_th_condo_result_bulk_2
+    file_data_bulk_3: projects_data_th_condo_result_bulk_3
+    file_data_urls_provinces: provinces-cities-areas_urls_th_condo
+    file_data_provinces: provinces-cities-areas_data_th_condo
+  Thailand houses:
+    tab_name: Thailand houses
+    domain: dotproperty.co.th
+    filter_row: 5
+    file_proj_urls: links_th_prov_houses
+    file_data_bulk_1: projects_data_th_houses_result_bulk_1
+    file_data_bulk_2: projects_data_th_houses_result_bulk_2
+    file_data_bulk_3: projects_data_th_houses_result_bulk_3
+    file_data_urls_provinces: provinces-cities-areas_urls_th_houses
+    file_data_provinces: provinces-cities-areas_data_th_houses
+  Thailand townhouses:
+    tab_name: Thailand townhouses
+    domain: dotproperty.co.th
+    filter_row: 6
+    file_proj_urls: links_th_townhouses
+    file_data_bulk_1: projects_data_th_townhouses_result_bulk_1
+    file_data_bulk_2: projects_data_th_townhouses_result_bulk_2
+    file_data_bulk_3: projects_data_th_townhouses_result_bulk_3
+    file_data_urls_provinces: provinces-cities-areas_urls_th_townhouses
+    file_data_provinces: provinces-cities-areas_data_th_townhouses
+  Philippines condominiums:
+    tab_name: Philippines condominiums
+    domain: dotproperty.com.ph
+    filter_row: 7
+    file_proj_urls: links_ph_condos
+    file_data_bulk_1: projects_data_ph_condos_result_bulk_1
+    file_data_bulk_2: projects_data_ph_condos_result_bulk_2
+    file_data_bulk_3: projects_data_ph_condos_result_bulk_3
+    file_data_urls_provinces: provinces-cities-areas_urls_ph_condos
+    file_data_provinces: provinces-cities-areas_data_ph_condos
+  Philippines houses:
+    tab_name: Philippines houses
+    domain: dotproperty.com.ph
+    filter_row: 8
+    file_proj_urls: links_ph_houses
+    file_data_bulk_1: projects_data_ph_houses_result_bulk_1
+    file_data_bulk_2: projects_data_ph_houses_result_bulk_2
+    file_data_bulk_3: projects_data_ph_houses_result_bulk_3
+    file_data_urls_provinces: provinces-cities-areas_urls_ph_houses
+    file_data_provinces: provinces-cities-areas_data_ph_houses
+  Philippines townhouses:
+    tab_name: Philippines townhouses
+    domain: dotproperty.com.ph
+    filter_row: 9
+    file_proj_urls: links_ph_townhouses
+    file_data_bulk_1: projects_data_ph_townhouses_result_bulk_1
+    file_data_bulk_2: projects_data_ph_townhouses_result_bulk_2
+    file_data_bulk_3: projects_data_ph_townhouses_result_bulk_3
+    file_data_urls_provinces: provinces-cities-areas_urls_ph_townhouses
+    file_data_provinces: provinces-cities-areas_data_ph_townhouses
+  Vietnam condominiums:
+    tab_name: Vietnam condominiums
+    domain: dotproperty.com.vn
+    filter_row: 10
+    file_proj_urls: links_vn_condos
+    file_data_bulk_1: projects_data_vn_condos_result_bulk_1
+    file_data_bulk_2: projects_data_vn_condos_result_bulk_2
+    file_data_bulk_3: projects_data_vn_condos_result_bulk_3
+    file_data_urls_provinces: provinces-cities-areas_urls_vn_condos
+    file_data_provinces: provinces-cities-areas_data_vn_condos
+  Vietnam houses:
+    tab_name: Vietnam houses
+    domain: dotproperty.com.vn
+    filter_row: 11
+    file_proj_urls: links_vn_houses
+    file_data_bulk_1: projects_data_vn_houses_result_bulk_1
+    file_data_bulk_2: projects_data_vn_houses_result_bulk_2
+    file_data_bulk_3: projects_data_vn_houses_result_bulk_3
+    file_data_urls_provinces: provinces-cities-areas_urls_vn_houses
+    file_data_provinces: provinces-cities-areas_data_vn_houses
+  Vietnam townhouses:
+    tab_name: Vietnam townhouses
+    domain: dotproperty.com.vn
+    filter_row: 12
+    file_proj_urls: links_vn_townhouses
+    file_data_bulk_1: projects_data_vn_townhouses_result_bulk_1
+    file_data_bulk_2: projects_data_vn_townhouses_result_bulk_2
+    file_data_bulk_3: projects_data_vn_townhouses_result_bulk_3
+    file_data_urls_provinces: provinces-cities-areas_urls_vn_townhouses
+    file_data_provinces: provinces-cities-areas_data_vn_townhouses
+  Malaysia condominiums:
+    tab_name: Malaysia condominiums
+    domain: dotproperty.com.my
+    filter_row: 13
+    file_proj_urls: links_my_condos
+    file_data_bulk_1: projects_data_my_condos_result_bulk_1
+    file_data_bulk_2: projects_data_my_condos_result_bulk_2
+    file_data_bulk_3: projects_data_my_condos_result_bulk_3
+    file_data_urls_provinces: provinces-cities-areas_urls_my_condos
+    file_data_provinces: provinces-cities-areas_data_my_condos
+  Malaysia houses:
+    tab_name: Malaysia houses
+    domain: dotproperty.com.my
+    filter_row: 14
+    file_proj_urls: links_my_houses
+    file_data_bulk_1: projects_data_my_houses_result_bulk_1
+    file_data_bulk_2: projects_data_my_houses_result_bulk_2
+    file_data_bulk_3: projects_data_my_houses_result_bulk_3
+    file_data_urls_provinces: provinces-cities-areas_urls_my_houses
+    file_data_provinces: provinces-cities-areas_data_my_houses
+  Malaysia townhouses:
+    tab_name: Malaysia townhouses
+    domain: dotproperty.com.my
+    filter_row: 15
+    file_proj_urls: links_my_townhouses
+    file_data_bulk_1: projects_data_my_townhouses_result_bulk_1
+    file_data_bulk_2: projects_data_my_townhouses_result_bulk_2
+    file_data_bulk_3: projects_data_my_townhouses_result_bulk_3
+    file_data_urls_provinces: provinces-cities-areas_urls_my_townhouses
+    file_data_provinces: provinces-cities-areas_data_my_townhouses
+  Indonesia condominiums:
+    tab_name: Indonesia condominiums
+    domain: dotproperty.id
+    filter_row: 16
+    file_proj_urls: links_id_condos
+    file_data_bulk_1: projects_data_id_condos_result_bulk_1
+    file_data_bulk_2: projects_data_id_condos_result_bulk_2
+    file_data_bulk_3: projects_data_id_condos_result_bulk_3
+    file_data_urls_provinces: provinces-cities-areas_urls_id_condos
+    file_data_provinces: provinces-cities-areas_data_id_condos
+  Indonesia houses:
+    tab_name: Indonesia houses
+    domain: dotproperty.id
+    filter_row: 17
+    file_proj_urls: links_id_houses
+    file_data_bulk_1: projects_data_id_houses_result_bulk_1
+    file_data_bulk_2: projects_data_id_houses_result_bulk_2
+    file_data_bulk_3: projects_data_id_houses_result_bulk_3
+    file_data_urls_provinces: provinces-cities-areas_urls_id_houses
+    file_data_provinces: provinces-cities-areas_data_id_houses
+  Indonesia townhouses:
+    tab_name: Indonesia townhouses
+    domain: dotproperty.id
+    filter_row: 18
+    file_proj_urls: links_id_townhouses
+    file_data_bulk_1: projects_data_id_townhouses_result_bulk_1
+    file_data_bulk_2: projects_data_id_townhouses_result_bulk_2
+    file_data_bulk_3: projects_data_id_townhouses_result_bulk_3
+    file_data_urls_provinces: provinces-cities-areas_urls_id_townhouses
+    file_data_provinces: provinces-cities-areas_data_id_townhouses
+  Singapore condominiums:
+    tab_name: Singapore condominiums
+    domain: dotproperty.com.sg
+    filter_row: 19
+    file_proj_urls: links_sg_condos
+    file_data_bulk_1: projects_data_sg_condos_result_bulk_1
+    file_data_bulk_2: projects_data_sg_condos_result_bulk_2
+    file_data_bulk_3: projects_data_sg_condos_result_bulk_3
+    file_data_urls_provinces: provinces-cities-areas_urls_sg_condos
+    file_data_provinces: provinces-cities-areas_data_sg_condos
+  Singapore houses:
+    tab_name: Singapore houses
+    domain: dotproperty.com.sg
+    filter_row: 20
+    file_proj_urls: links_sg_houses
+    file_data_bulk_1: projects_data_sg_houses_result_bulk_1
+    file_data_bulk_2: projects_data_sg_houses_result_bulk_2
+    file_data_bulk_3: projects_data_sg_houses_result_bulk_3
+    file_data_urls_provinces: provinces-cities-areas_urls_sg_houses
+    file_data_provinces: provinces-cities-areas_data_sg_houses
+  Singapore townhouses:
+    tab_name: Singapore townhouses
+    domain: dotproperty.com.sg
+    filter_row: 21
+    file_proj_urls: links_sg_townhouses
+    file_data_bulk_1: projects_data_sg_townhouses_result_bulk_1
+    file_data_bulk_2: projects_data_sg_townhouses_result_bulk_2
+    file_data_bulk_3: projects_data_sg_townhouses_result_bulk_3
+    file_data_urls_provinces: provinces-cities-areas_urls_sg_townhouses
+    file_data_provinces: provinces-cities-areas_data_sg_townhouses
+  Myanmar condominiums:
+    tab_name: Myanmar condominiums
+    domain: dotproperty.com.mm
+    file_proj_urls: links_mm_condos
+    file_data_bulk_1: projects_data_mm_condos_result_bulk_1
+    file_data_bulk_2: projects_data_mm_condos_result_bulk_2
+    file_data_bulk_3: projects_data_mm_condos_result_bulk_3
+    file_data_urls_provinces: provinces-cities-areas_urls_mm_condos
+    file_data_provinces: provinces-cities-areas_data_mm_condos
+  Myanmar houses:
+    tab_name: Myanmar houses
+    domain: dotproperty.com.mm
+    file_proj_urls: links_mm_houses
+    file_data_bulk_1: projects_data_mm_houses_result_bulk_1
+    file_data_bulk_2: projects_data_mm_houses_result_bulk_2
+    file_data_bulk_3: projects_data_mm_houses_result_bulk_3
+    file_data_urls_provinces: provinces-cities-areas_urls_mm_houses
+    file_data_provinces: provinces-cities-areas_data_mm_houses
+  Myanmar townhouses:
+    tab_name: Myanmar townhouses
+    domain: dotproperty.com.mm
+    file_proj_urls: links_mm_townhouses
+    file_data_bulk_1: projects_data_mm_townhouses_result_bulk_1
+    file_data_bulk_2: projects_data_mm_townhouses_result_bulk_2
+    file_data_bulk_3: projects_data_mm_townhouses_result_bulk_3
+    file_data_urls_provinces: provinces-cities-areas_urls_mm_townhouses
+    file_data_provinces: provinces-cities-areas_data_mm_townhouses
+  Cambodia condominiums:
+    tab_name: Cambodia condominiums
+    domain: dotproperty-kh.com
+    file_proj_urls: links_kh_condos
+    file_data_bulk_1: projects_data_kh_condos_result_bulk_1
+    file_data_bulk_2: projects_data_kh_condos_result_bulk_2
+    file_data_bulk_3: projects_data_kh_condos_result_bulk_3
+    file_data_urls_provinces: provinces-cities-areas_urls_kh_condos
+    file_data_provinces: provinces-cities-areas_data_kh_condos
+  Cambodia houses:
+    tab_name: Cambodia houses
+    domain: dotproperty-kh.com
+    file_proj_urls: links_kh_houses
+    file_data_bulk_1: projects_data_kh_houses_result_bulk_1
+    file_data_bulk_2: projects_data_kh_houses_result_bulk_2
+    file_data_bulk_3: projects_data_kh_houses_result_bulk_3
+    file_data_urls_provinces: provinces-cities-areas_urls_kh_houses
+    file_data_provinces: provinces-cities-areas_data_kh_houses
+  Cambodia townhouses:
+    tab_name: Cambodia townhouses
+    domain: dotproperty-kh.com
+    file_proj_urls: links_kh_townhouses
+    file_data_bulk_1: projects_data_kh_townhouses_result_bulk_1
+    file_data_bulk_2: projects_data_kh_townhouses_result_bulk_2
+    file_data_bulk_3: projects_data_kh_townhouses_result_bulk_3
+    file_data_urls_provinces: provinces-cities-areas_urls_kh_townhouses
+    file_data_provinces: provinces-cities-areas_data_kh_townhouses
+  Laos condominiums:
+    tab_name: Laos condominiums
+    domain: dotproperty.la
+    file_proj_urls: links_la_condos
+    file_data_bulk_1: projects_data_la_condos_result_bulk_1
+    file_data_bulk_2: projects_data_la_condos_result_bulk_2
+    file_data_bulk_3: projects_data_la_condos_result_bulk_3
+    file_data_urls_provinces: provinces-cities-areas_urls_la_condos
+    file_data_provinces: provinces-cities-areas_data_la_condos
+  Laos houses:
+    tab_name: Laos houses
+    domain: dotproperty.la
+    file_proj_urls: links_la_houses
+    file_data_bulk_1: projects_data_la_houses_result_bulk_1
+    file_data_bulk_2: projects_data_la_houses_result_bulk_2
+    file_data_bulk_3: projects_data_la_houses_result_bulk_3
+    file_data_urls_provinces: provinces-cities-areas_urls_la_houses
+    file_data_provinces: provinces-cities-areas_data_la_houses
+  Laos townhouses:
+    tab_name: Laos townhouses
+    domain: dotproperty.la
+    file_proj_urls: links_la_townhouses
+    file_data_bulk_1: projects_data_la_townhouses_result_bulk_1
+    file_data_bulk_2: projects_data_la_townhouses_result_bulk_2
+    file_data_bulk_3: projects_data_la_townhouses_result_bulk_3
+    file_data_urls_provinces: provinces-cities-areas_urls_la_townhouses
+    file_data_provinces: provinces-cities-areas_data_la_townhouses
+  Hong Kong condominiums:
+    tab_name: Hong Kong condominiums
+    domain: dotproperty.hk
+    file_proj_urls: links_hk_condos
+    file_data_bulk_1: projects_data_hk_condos_result_bulk_1
+    file_data_bulk_2: projects_data_hk_condos_result_bulk_2
+    file_data_bulk_3: projects_data_hk_condos_result_bulk_3
+    file_data_urls_provinces: provinces-cities-areas_urls_hk_condos
+    file_data_provinces: provinces-cities-areas_data_hk_condos
+  Hong Kong houses:
+    tab_name: Hong Kong houses
+    domain: dotproperty.hk
+    file_proj_urls: links_hk_houses
+    file_data_bulk_1: projects_data_hk_houses_result_bulk_1
+    file_data_bulk_2: projects_data_hk_houses_result_bulk_2
+    file_data_bulk_3: projects_data_hk_houses_result_bulk_3
+    file_data_urls_provinces: provinces-cities-areas_urls_hk_houses
+    file_data_provinces: provinces-cities-areas_data_hk_houses
+  Hong Kong townhouses:
+    tab_name: Hong Kong townhouses
+    domain: dotproperty.hk
+    file_proj_urls: links_hk_townhouses
+    file_data_bulk_1: projects_data_hk_townhouses_result_bulk_1
+    file_data_bulk_2: projects_data_hk_townhouses_result_bulk_2
+    file_data_bulk_3: projects_data_hk_townhouses_result_bulk_3
+    file_data_urls_provinces: provinces-cities-areas_urls_hk_townhouses
+    file_data_provinces: provinces-cities-areas_data_hk_townhouses

@@ -1,0 +1,12 @@
+Process is: (1) scrape projects; (2) area URLs get created based on scraped projects; (3) scrape areas; (4) scrape area data on project's earliest month (last 2 columns in Projects for Sergei tab)
+
+
+1. scrape_links_condo.py (all, not only 35)
+2. dotproperty-1.py
+3. clear tab: Projects tab for Sergei
+4. load_to_sheet.py
+5. wait 3-5 minutes
+6. dotproperty-mix.py
+7. read_sheet.py
+8. dotproperty-2.py
+9. load_to_sheet-2.py

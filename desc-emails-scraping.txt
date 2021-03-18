@@ -1,0 +1,3 @@
+Targets at least: Metro Manila, Cebu, Cavite, Batangas, Laguna, Bulacan and Rizal
+
+TODO: spoof UA in every request

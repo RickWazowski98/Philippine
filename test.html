@@ -1,0 +1,408 @@
+<section class="market-location-stats">
+    <div class="market-stats-heading">
+                <span>
+            <i class="fa fa-bar-chart"></i>
+        </span>
+        <h2>
+            Suthep condo Market insight
+        </h2>
+            </div>
+            <div class="market-stats-body">
+        <div class="market-stat-loading"></div>
+        <div class="market-stats">
+            <div class="form-group col-md-3 property-options">
+                <select class="form-control" id="market-stats-property-type">
+                                            <option value="condo" selected >Condo</option>
+                                            <option value="house"  >House</option>
+                                            <option value="townhouse"  >Townhouse</option>
+                                            <option value="land"  >Land</option>
+                                    </select>
+            </div>
+                                    <ul class="investor-metrics">
+                <li>
+                    <div class="metric-name">
+                        <span>Median price</span>
+                    </div>
+                    <div class="metric-value">
+
+                        ฿ 2,072,621
+                    </div>
+                </li>
+                <li>
+                    <div class="metric-name">
+                                                    <span>Median price/sqm.</span>
+                                            </div>
+                    <div class="metric-value">
+                        ฿ 56,459
+                    </div>
+                </li>
+                <li>
+                    <div class="metric-name">
+                        <span>Annual growth</span>
+
+                    </div>
+                    <div class="metric-value">
+                        <i class="icon icon-arrow-circle-down"></i>-21.8%
+                    </div>
+                </li>
+                <li>
+                    <div class="metric-name">
+                        <span>Median rent price</span>
+
+                    </div>
+                    <div class="metric-value">
+                        ฿ 11,292
+                    </div>
+                </li>
+                <li>
+                    <div class="metric-name">
+                        <span>Rental yield</span>
+
+                    </div>
+                    <div class="metric-value">
+                        <i class="icon icon-arrow-circle-up"></i>6.5%
+                    </div>
+                </li>
+            </ul>
+            
+                        <div class="col-md-12 row" id="indicator-txt-panel">
+                <div class="indicator-txt row">
+                    <div class="col-md-12">
+                        The median list price for condos in Suthep is ฿ 2,072,621. The median list price has gone down by 21.8% over the last year. The median list price per square meter for condos in Suthep is ฿ 56,459 per sqm. <br/><br/>The median rent price for condos in Suthep is ฿ 11,292.<br/><br/>The gross rental yield on condos in Suthep is 6.5%.
+                    </div>
+                </div>
+            </div>
+                        <div class="form-group options">
+                <div class="form-group col-md-4" id="options-result">
+                    <select class="form-control indicator-graph-panel" id="market-stats-type">
+                                                                                <option value="sqmSale" selected >Median sale price/sqm.</option>
+                                                                                                            <option value="sale"  >Median sale price</option>
+                                                                                                            <option value="sqmRent"  >Median rent price/sqm.</option>
+                                                                                                            <option value="rent"  >Median rent price</option>
+                                                                        </select>
+                </div>
+            </div>
+            <div class="indicator-graphs">
+                <div id="canvas-holder" class="indicator-graphs indicator-graph-panel">
+                    <canvas id="market-stats-chart" height="300"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+        <div class="clearfix"></div>
+</section>
+
+    <script>
+        var ctx = document.getElementById("market-stats-chart").getContext('2d');
+        var chartType = $('#market-stats-type').val();
+        // Chart.defaults.global.responsive = true;
+        // Chart.defaults.global.maintainAspectRatio = false;
+        marketStatsChart = new Chart(ctx, {
+           type: 'bar',
+           data: getDataSets(chartType),
+           options: getOptions(chartType)
+        });
+
+    function getChartDataSets(type) {
+        var chartData = {
+                        'sqmSale': {
+                data : {
+                    dataSets : [{
+                        type: 'line',
+                        radius: 0,
+                        borderColor: "rgb(79,190,75)",
+                        backgroundColor: "rgb(79,190,75)",
+                        fill:false,
+                        showLine:true,
+                        data: [61111,61111,60593,60938,60362,61512,57896,58580,55542,54202,53853,54367,54449,54621,54705,55228,55430,56494,56916,54422,56204,57375,58360,57184,65148,61596,63388,61550,61112,61003,57129,57282,54946,53586,53778,53061,53090,55119,57022,60959,64084,66645,68260,68794,69277,67850,66544,66050,65990,65939,65567,65930,66335,66979,66000,64493,64225,62742,62736,61503,61328,61144,60094,58404,57507,56441,56459],
+                        label: htmlDecode('Median sale price/sqm.'
+                        + ' in '
+                        + 'Suthep')
+                    }
+                                        ,{
+                        type: 'bar',
+                        backgroundColor: "rgb(215, 219, 221)",
+                                        borderColor: "rgb(215, 219, 221)",
+                        data: [,,,,,,,,,,,,,,,42326,47029,44198,47071,45635,57417,51526,51939,47309,48708,47609,56748,51025,51549,46740,48388,47335,46260,49429,47844,46181,50151,49444,55120,52652,56088,53580,54932,51723,55944,53806,56009,50994,51690,48018,49876,49949,50347,48143,49903,49477,48663,48823,49478,48914,47051,46601,44172,45054,42384,43125,46291],
+                                        label: htmlDecode('Average enquiry sale price/sqm.'
+                        + ' in '
+                        + 'Suthep')
+                                }
+                                    ]
+                },
+                yAxes : {
+                    min: 28000,
+                    max: 84000,
+                    stepSize: 14000,
+                }
+
+            },
+                                    'sale': {
+                data : {
+                    dataSets : [{
+                        type: 'line',
+                        radius: 0,
+                        borderColor: "rgb(79,190,75)",
+                        backgroundColor: "rgb(79,190,75)",
+                        fill:false,
+                        showLine:true,
+                        data:[3500000,3500000,3416667,3305556,3224074,2976543,2833539,2703361,2658967,2554109,2564359,2569489,2584616,2581368,2555328,2520566,2500298,2473621,2324640,2407754,2310798,2522850,2344549,2287467,2594005,2610491,2839276,2990756,3136011,3274922,3148089,3152115,3141734,2986839,2785358,2695732,2598697,2698143,2603946,2658613,2733534,2810063,3024056,3018516,3159428,3078204,2926433,2802498,2705894,2680070,2645624,2619279,2614134,2657138,2652091,2568228,2516106,2435306,2411276,2353838,2300936,2278232,2218184,2164376,2119841,2080523,2072621],
+                        label: htmlDecode('Median sale price'
+                        + ' in '
+                        + 'Suthep')
+                    }
+                                        ,{
+                        type: 'bar',
+                        backgroundColor: "rgb(215, 219, 221)",
+                                        borderColor: "rgb(215, 219, 221)",
+                        data:[,,,,,,,,,,,,,,,1600000,3007500,3494167,2800556,3147361,4899306,4023333,3474213,3665849,3167004,3010951,3257652,2752867,3503506,3252125,2785210,3144112,3259774,3282962,3271368,2794777,2899826,3081534,2842120,2707885,3016668,2668184,2661618,2898823,2620147,2547990,2456046,2679123,2360056,2319726,2236594,2112107,2165567,2189225,2195597,2113607,2076401,2050003,2031301,1961768,1916857,1918431,1763696,1779375,1697690,1855689,1857793],
+                                        label: htmlDecode('Average enquiry sale price'
+                        + ' in '
+                        + 'Suthep')
+                                }
+                                    ]
+                },
+                yAxes : {
+                    min: 800000,
+                    max: 5750000,
+                    stepSize: 1650000,
+                }
+
+            },
+                                    'sqmRent': {
+                data : {
+                    dataSets : [{
+                        type: 'line',
+                        radius: 0,
+                        borderColor: "rgb(79,190,75)",
+                        backgroundColor: "rgb(79,190,75)",
+                        fill:false,
+                        showLine:true,
+                        data:[,333,333,328,322,318,321,320,321,315,318,316,311,308,305,307,306,298,297,292,296,292,293,300,304,304,298,297,296,296,295,297,298,302,302,303,304,303,305,306,307,311,320,322,325,322,320,316,317,312,316,319,321,331,348,354,351,343,331,324,314,307,301,293,289,286,285],
+                        label: htmlDecode('Median rent price/sqm.'
+                        + ' in '
+                        + 'Suthep')
+                    }
+                                        ,{
+                        type: 'bar',
+                        backgroundColor: "rgb(215, 219, 221)",
+                                        borderColor: "rgb(215, 219, 221)",
+                        data:[,,,,,,,,,,,,,,,,,,,,,,256,253,295,294,305,320,287,284,276,267,245,236,241,228,246,256,243,233,248,258,267,266,276,276,290,264,269,255,263,269,259,261,257,251,247,259,241,257,241,244,236,226,220,226,227],
+                                        label: htmlDecode('Average enquiry rent price/sqm.'
+                        + ' in '
+                        + 'Suthep')
+                                }
+                                    ]
+                },
+                yAxes : {
+                    min: 150,
+                    max: 430,
+                    stepSize: 70,
+                }
+
+            },
+                                    'rent': {
+                data : {
+                    dataSets : [{
+                        type: 'line',
+                        radius: 0,
+                        borderColor: "rgb(79,190,75)",
+                        backgroundColor: "rgb(79,190,75)",
+                        fill:false,
+                        showLine:true,
+                        data:[,11000,10500,10833,10778,10870,11216,11362,11526,11629,11718,11783,11834,11205,11680,11443,11561,12001,12687,13341,13843,13728,14023,13417,13480,13132,13482,13505,13362,13706,13453,13648,13332,13049,12793,12614,12574,12674,12711,12897,13314,13168,12931,13646,13873,13903,13592,13359,13400,13327,13743,14114,14522,14929,16050,16160,16049,15300,14826,14552,13692,12880,12246,11674,11360,11209,11292],
+                        label: htmlDecode('Median rent price'
+                        + ' in '
+                        + 'Suthep')
+                    }
+                                        ,{
+                        type: 'bar',
+                        backgroundColor: "rgb(215, 219, 221)",
+                                        borderColor: "rgb(215, 219, 221)",
+                        data:[,,,,,,,,,,,,,,,,,,,,,,9000,12500,11167,12722,12296,14340,11816,12600,11139,10579,11128,9736,10432,10473,11068,10680,10555,10379,10311,10530,10280,10270,10183,10485,10489,9825,9771,11265,10227,10891,11039,11060,11366,11142,11503,11365,11623,11528,11483,11670,10774,9981,10918,9800,10956],
+                                        label: htmlDecode('Average enquiry rent price'
+                        + ' in '
+                        + 'Suthep')
+                                }
+                                    ]
+                },
+                yAxes : {
+                    min: 5000,
+                    max: 21000,
+                    stepSize: 4000,
+                }
+
+            },
+                    }
+
+        return chartData[type];
+    }
+
+    function getDataSets(chartType){
+        var dataSetsArr = getChartDataSets(chartType);
+        // console.log(dataSetsArr.data.dataSets)
+        var dataSets = {
+            labels: ["Aug 2015","Sep 2015","Oct 2015","Nov 2015","Dec 2015","Jan 2016","Feb 2016","Mar 2016","Apr 2016","May 2016","Jun 2016","Jul 2016","Aug 2016","Sep 2016","Oct 2016","Nov 2016","Dec 2016","Jan 2017","Feb 2017","Mar 2017","Apr 2017","May 2017","Jun 2017","Jul 2017","Aug 2017","Sep 2017","Oct 2017","Nov 2017","Dec 2017","Jan 2018","Feb 2018","Mar 2018","Apr 2018","May 2018","Jun 2018","Jul 2018","Aug 2018","Sep 2018","Oct 2018","Nov 2018","Dec 2018","Jan 2019","Feb 2019","Mar 2019","Apr 2019","May 2019","Jun 2019","Jul 2019","Aug 2019","Sep 2019","Oct 2019","Nov 2019","Dec 2019","Jan 2020","Feb 2020","Mar 2020","Apr 2020","May 2020","Jun 2020","Jul 2020","Aug 2020","Sep 2020","Oct 2020","Nov 2020","Dec 2020","Jan 2021","Feb 2021"],
+            datasets: dataSetsArr.data.dataSets
+        }
+        return dataSets;
+    }
+    function getOptions(chartType){
+        var dataSetsArr = getChartDataSets(chartType);
+        // console.log(dataSetsArr);
+        var options = {
+            maintainAspectRatio: false,
+            responsive: true,
+            maintainAspectRatio: false,
+            legend: {
+                display: true,
+                position: 'bottom',
+                onClick: function(e, legendItem) {
+
+                  var index = legendItem.datasetIndex;
+                  var ci = this.chart;
+                  var alreadyHidden = (ci.getDatasetMeta(index).hidden === null) ? false : ci.getDatasetMeta(index).hidden;
+
+                  var anyOthersAlreadyHidden = false;
+                  var allOthersHidden = true;
+
+                  // figure out the current state of the labels
+                  ci.data.datasets.forEach(function(e, i) {
+                    var meta = ci.getDatasetMeta(i);
+
+                    if (i !== index) {
+                      if (meta.hidden) {
+                        anyOthersAlreadyHidden = true;
+                      } else {
+                        allOthersHidden = false;
+                      }
+                    }
+                  });
+
+                  // if the label we clicked is already hidden
+                  // then we now want to unhide (with any others already unhidden)
+                  if (alreadyHidden) {
+                    ci.getDatasetMeta(index).hidden = null;
+                  } else {
+                    // otherwise, lets figure out how to toggle visibility based upon the current state
+                    ci.data.datasets.forEach(function(e, i) {
+                      var meta = ci.getDatasetMeta(i);
+
+                      if (i !== index) {
+                        // handles logic when we click on visible hidden label and there is currently at least
+                        // one other label that is visible and at least one other label already hidden
+                        // (we want to keep those already hidden still hidden)
+                        if (anyOthersAlreadyHidden && !allOthersHidden) {
+
+                          meta.hidden = true;
+                        } else {
+                          // toggle visibility
+                          meta.hidden = meta.hidden === null ? !meta.hidden : null;
+                        }
+                      } else {
+                        meta.hidden = null;
+                      }
+                    });
+                  }
+                  if (!allOthersHidden && !anyOthersAlreadyHidden && !alreadyHidden) {
+                     delete ci.options.scales.yAxes[0].ticks.min
+                     delete ci.options.scales.yAxes[0].ticks.max
+                     delete ci.options.scales.yAxes[0].ticks.stepSize
+                  }else{
+                     updateChart();
+                     return;
+                  }
+
+                  ci.update();
+                },
+            },
+            hover: {
+              mode: 'nearest',
+              intersect: false,
+            },
+            title:{
+                display: false,
+                text: 'Median Sale'
+            },
+            tooltips: {
+                intersect: false,
+                mode: 'index',
+                callbacks: {
+                    label: function(tooltipItem, data) {
+                        var label = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+                        return ' ฿' + addCommas(label);
+                    }
+                },
+                custom: function(tooltip) {
+                        if (!tooltip) return;
+                        // disable displaying the color box;
+                        // tooltip.displayColors = false;
+                    },
+            },
+
+            scales: {
+                xAxes: [{
+                    // padding: 100,
+                    display: true,
+                    barPercentage: 0.4,
+                    gridLines : {
+                       display : false
+                    }
+                }],
+                yAxes: [{
+                    gridLines : {
+                       display : true
+                    },
+                    ticks: {
+                        // beginAtZero:true,
+                        fontColor: "rgb(79,190,75)",
+                        min:dataSetsArr.yAxes.min,
+                        max: dataSetsArr.yAxes.max,
+                        stepSize: dataSetsArr.yAxes.stepSize,
+                        fontSize: 10,
+                        beginAtZero: false,
+                        userCallback: function(value, index, values) {
+                            value = value.toString();
+                            return '฿' + nFormatter(value);
+                        }
+                    },
+                }]
+            }
+        }
+
+        return options;
+    }
+
+   function updateChart(){
+       var newType = $('#market-stats-type').val();
+       var newDataSets =  getChartDataSets(newType);
+    //    console.log(newType);
+
+       marketStatsChart.options.scales.yAxes[0].ticks.min = newDataSets.yAxes.min;
+       marketStatsChart.options.scales.yAxes[0].ticks.max = newDataSets.yAxes.max;
+       marketStatsChart.options.scales.yAxes[0].ticks.stepSize = newDataSets.yAxes.stepSize;
+       marketStatsChart.data.datasets = newDataSets.data.dataSets;
+       marketStatsChart.update();
+   }
+
+
+   function nFormatter(num) {
+        if (num >= 1000000000) {
+            return ( Math.round( ((num / 1000000000) * 100)) / 100).toFixed(1) + 'B';
+        //    return (num / 1000000000).toFixed(1).replace(/\.0$/, '') + 'G';
+        }
+        if (num >= 1000000) {
+            return (Math.round( ((num / 1000000) * 100) )  / 100 ).toFixed(1) + 'M';
+        //    return (num / 1000000).toFixed(1).replace(/\.0$/, '') + 'M';
+        }
+        if (num >= 1000) {
+            return (Math.round( ((num / 1000) * 100) )  / 100).toFixed(1) + 'K';
+        //    return (num / 1000).toFixed(1).replace(/\.0$/, '') + 'K';
+        }
+        return num;
+   }
+
+   $('#market-stats-type').on('change', updateChart);
+   $('#market-stats-property-type').on('change', getMarketStats);
+   $('#useEnquiry').on('change', getMarketStats);
+</script>

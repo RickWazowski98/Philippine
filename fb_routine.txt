@@ -1,0 +1,13 @@
+VIETNAM
+CafeLand
+
+https://nhadat.cafeland.vn/moi-gioi/le-duc-minh-0903762768-6.html
+email доступен из html
+FB messenger доступен (leducminhsg) по 'data-nickchat='
+
+Получить FB ID просто:
+делаем get-запрос к https://www.facebook.com/leducminhsg
+получаем 404 ошибку, ищем entity_id (100007926370646)
+
+
+Как идея сделать сайт типа https://findmyfbid.com/ для продажи трафа

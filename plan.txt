@@ -1,0 +1,12 @@
+1. Отладить Round 1, а именно добавить конструкции try/except, возвращающие пустую строку '' в крайнем случае.
+1а. В случае ошибки, логгировать это в отдельный файл. Можно еще оповещения в ТГ, если обновления часто.
+1б. Логгирование всего, но по разным уровням + ротация логов.
+
+2. Затем приступать к Round 2. (там только 4 переменных на output вроде)
+
+
+
+Рез-ты исправлений с 21.09:
+1) https://www.dotproperty.com.ph/condo/12/solinea-by-ayala-land -- должен сработать детект на outlier: Lowest ask price > 500000
+# 2) Lowest rent -- https://www.dotproperty.com.ph/condo/6456/amisa-private-residences должен сработать детект на outlier: Lowest rent > 2500
+This requires more time, cause script scraped just price in header 'FOR RENT' (not all prices yet)

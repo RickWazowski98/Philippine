@@ -1,0 +1,10 @@
+To summarize, what I should do:
+- scale script to scrape 18 websites (start just with Thailand condominiums tab first);
+- change the order of output; set output data to 18 tabs (later); 
+- add as notes to the column headers the filters that script uses (it uses filters which you text me during previous iterations);
+- add rotating fake User-agents with proxies to hide suspicious activity for website's owner;
+- speed: script should scrape everything during 8 hours timeframe.
+
+Right?
+
+cred proxies: royvankan@hotmail.com / VXRkjbxxTvuqYYMWfpFLQtUJ
