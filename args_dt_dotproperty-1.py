@@ -72,7 +72,7 @@ def get_data_condo(url):
         soup = BeautifulSoup(r.content, 'html.parser')
         # print(soup)
         if input_tab_name.split(" ")[0] == "Vietnam":
-            print("vi")
+            # print("vi")
             session = requests.Session()
             adapter = requests.adapters.HTTPAdapter(max_retries=20)
             session.mount('https://', adapter)
@@ -80,7 +80,7 @@ def get_data_condo(url):
             session.proxies.update(get_proxy())
             vi_url = url.replace("/en", "")
             vi_r = session.get(vi_url, headers=headers, timeout=20)
-            print(vi_url)
+            # print(vi_url)
             vi_soup = BeautifulSoup(vi_r.content, 'html.parser')
             try:
                 condo_name = vi_soup.find('div', {'class': 'row top-navigation-bar add-padding'}).find('a').text.strip()
@@ -104,7 +104,7 @@ def get_data_condo(url):
             province = breadcrumbs[3].text.strip()
             if len(breadcrumbs) > 5:
                 city = breadcrumbs[4].text.strip()
-                print(city)
+                # print(city)
             else:
                 city = ''
             if len(breadcrumbs) > 6:

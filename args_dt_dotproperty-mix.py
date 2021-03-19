@@ -122,13 +122,13 @@ def get_data_graph(url, month_target_1, month_target_2):
         session.mount('http://', adapter)
         session.proxies.update(get_proxy())
         # r = session.get(url, headers=headers_xml, timeout=30)
-        #print(url)
+        # print(url)
         r = session.get(url, headers=headers_xml, timeout=35)
         if r.status_code != 200:
             logger.debug('status_code', r.status_code)
             return None
         data = r.json()['msg']
-        print(r.text)
+        # print(r.text)
         
         try:
             median_sale_prices_sqm = data.split("'sqmSale': {")[1].split("data: [")[1].split("],")[0].split(',')

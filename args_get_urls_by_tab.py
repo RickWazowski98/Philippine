@@ -62,22 +62,23 @@ def get_data_projects(url):
     session.proxies.update(get_proxy())
     r = session.get(url, headers=headers, timeout=20, allow_redirects=True)
     if r.status_code == 503:
-        s = BeautifulSoup(r.text, 'html.parser')
-        form = s.find('form', {'class': 'challenge-form'})
-        action = form.get('action')
-        r_d = form.find('input', {'name': 'r'})
-        jschl_vc = form.find('input', {'name': 'jschl_vc'})
-        pass_v = form.find('input', {'name': 'pass'})
-        print(s)
+        logger.debug(f'request was block - {r.status_code}')
+        # s = BeautifulSoup(r.text, 'html.parser')
+        # form = s.find('form', {'class': 'challenge-form'})
+        # action = form.get('action')
+        # r_d = form.find('input', {'name': 'r'})
+        # jschl_vc = form.find('input', {'name': 'jschl_vc'})
+        # pass_v = form.find('input', {'name': 'pass'})
+        # print(s)
         # r = session.post('https://www.dotproperty.id' + action, data={'action': action, 'r': r_d, 'jschl_vc': jschl_vc, 'pass': pass_v})
-        #print(r.text)
+        # print(r.text)
     if r.status_code != 200:
         logger.debug('status_code {}'.format(r.status_code))
         return None
     soup = BeautifulSoup(r.content, 'html.parser')
     try:
         number_of_projects = int(soup.find('span', {'id': 'properties_total'}).text.replace(',', ''))
-        print(number_of_projects)
+        # print(number_of_projects)
     except:
         number_of_projects = 0
     logger.debug('number_of_projects {}'.format(number_of_projects))
@@ -102,7 +103,7 @@ def get_data_projects(url):
                 logger.debug('page {}'.format(i))
                 url_n_page = f"{url}?page={i}"
                 logger.debug(url_n_page)
-                r = requests.get(url_n_page, headers=headers, timeout=20)
+                r = session.get(url_n_page, headers=headers, timeout=20)
                 if r.status_code != 200:
                     logger.debug('status_code', r.status_code)
                     return None
@@ -142,5 +143,5 @@ if __name__ == "__main__":
     result = get_data_projects(url_main_A1)
     file_object = open(f"data/{mapping_config['file_proj_urls']}.json", 'w')
     json.dump(links_to_save, file_object, indent=4)
-    logger.debug(len(links_to_save))
+    logger.debug("{} link's was save".format(len(links_to_save)))
     
