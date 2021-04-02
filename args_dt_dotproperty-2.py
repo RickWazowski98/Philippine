@@ -14,6 +14,7 @@ from loguru import logger
 import os
 import sys
 from proxy_config import get_proxy
+from multiprocessing.pool import ThreadPool
 
 
 my_parser = argparse.ArgumentParser()
@@ -161,25 +162,41 @@ def get_data_graph(url):
             earliest_month_1 = months[month_num-1].replace('"','')
     except:
         earliest_month_1 = ''
-    
-    try:
-        part_2_1 = data.split("htmlDecode('Median sale price")[1].split("data: [")[1].split("],")[0].split(',')[-1]
-    except:
-        part_2_1 = ''
-    try:
-        part_2_2 = data.split("htmlDecode('Median sale price'\n")[1].split("data:[")[1].split("],")[0].split(',')[-1]
-    except:
-        part_2_2 = ''
-    try:
-        part_2_3 = data.split("htmlDecode('Median rent price")[1].split("type: 'bar'")[1].split("data:[")[1].split("],")[0].split(',')[-1]
-    except:
-        part_2_3 = ''
-    # logger.debug(data.split("htmlDecode('Median rent price'\n")[1].split("data:[")[1])
-    try:
-        part_2_4 = data.split("htmlDecode('Median rent price'\n")[1].split("data:[")[1].split("],")[0].split(',')[-1]
-        
-    except:
-        part_2_4 = ''
+    # print(data)
+    if input_tab_name == "Vietnam townhouses":
+        try:
+            part_2_1 = data.split("htmlDecode('Giá bán trung bình")[1].split("data: [")[1].split("],")[0].split(',')[-1]
+        except:
+            part_2_1 = ''
+        try:
+            part_2_2 = data.split("htmlDecode('Giá bán trung bình'\n")[1].split("data:[")[1].split("],")[0].split(',')[-1]
+        except:
+            part_2_2 = ''
+        try:
+            part_2_3 = data.split("htmlDecode('Giá cho thuê trung bình")[1].split("type: 'bar'")[1].split("data:[")[1].split("],")[0].split(',')[-1]
+        except:
+            part_2_3 = ''
+        try:
+            part_2_4 = data.split("htmlDecode('Giá cho thuê trung bình'\n")[1].split("data:[")[1].split("],")[0].split(',')[-1]
+        except:
+            part_2_4 = ''
+    else:
+        try:
+            part_2_1 = data.split("htmlDecode('Median sale price")[1].split("data: [")[1].split("],")[0].split(',')[-1]
+        except:
+            part_2_1 = ''
+        try:
+            part_2_2 = data.split("htmlDecode('Median sale price'\n")[1].split("data:[")[1].split("],")[0].split(',')[-1]
+        except:
+            part_2_2 = ''
+        try:
+            part_2_3 = data.split("htmlDecode('Median rent price")[1].split("type: 'bar'")[1].split("data:[")[1].split("],")[0].split(',')[-1]
+        except:
+            part_2_3 = ''
+        try:
+            part_2_4 = data.split("htmlDecode('Median rent price'\n")[1].split("data:[")[1].split("],")[0].split(',')[-1]
+        except:
+            part_2_4 = ''
     try:
         part_2_5 = data.split("'sale': {")[1].split("data:[")[1].split("],")[0].split(',')[-1]
     except:
@@ -193,23 +210,23 @@ def get_data_graph(url):
 if __name__ == "__main__":
     file_object = open(f"data/{mapping_config['file_data_urls_provinces']}.json", 'r')
     links = json.load(file_object)
-    result = []
+    pool = ThreadPool(20)
 
-    j = 1
     resolved_links = []
     for link in links:
         if input_tab_name == "Vietnam townhouses":
             r = resolve_graph_link(link.replace('en/', ''))
         else:
             r = resolve_graph_link(link)
-        resolved_links.append(r)
-    for link in resolved_links:
-        if link is not None and link != '':
-            logger.debug(link, f"{j}/{len(resolved_links)}")
-            result_project = get_data_graph(link)
-            result.append(result_project)
-        
-            j += 1
+        if r is not None and r != '':
+            resolved_links.append(r)
+    # for link in resolved_links:
+    #     result_project = get_data_graph(link)
+    #     result.append(result_project)
+    result = pool.map(get_data_graph, resolved_links)
+    pool.close()
+    pool.join()
+    time.sleep(5)
         # time.sleep(1)
     #print(result)
     file_object = open(f"data/{mapping_config['file_data_provinces']}.json", 'w')

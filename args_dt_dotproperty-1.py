@@ -82,15 +82,6 @@ def get_data_condo(url):
             vi_r = session.get(vi_url, headers=headers, timeout=20)
             # print(vi_url)
             vi_soup = BeautifulSoup(vi_r.content, 'html.parser')
-            try:
-                condo_name = vi_soup.find('div', {'class': 'row top-navigation-bar add-padding'}).find('a').text.strip()
-            except:
-                condo_name = ''
-            try:
-                developer_name = vi_soup.find('div', {'class': 'col-sm-6 nav-top-btngroups text-right'}).find('li').find(
-                    'p').text.strip()
-            except:
-                developer_name = ''
             """
             locations = vi_soup.find('div', {'class': 'locations'}).find('small').text.strip()
             try:
@@ -100,8 +91,14 @@ def get_data_condo(url):
                 city = ''
             area = " ".join(vi_soup.find('ol', {'class': 'breadcrumb'}).find_all('li')[-2].text.split())
             """
-            breadcrumbs = vi_soup.find('ol', {'class': 'breadcrumb'}).find_all('li')
-            province = breadcrumbs[3].text.strip()
+            try:
+                breadcrumbs = vi_soup.find('ol', {'class': 'breadcrumb'}).find_all('li')
+            except:
+                breadcrumbs = ''
+            try:
+                province = breadcrumbs[3].text.strip()
+            except:
+                province = ''
             if len(breadcrumbs) > 5:
                 city = breadcrumbs[4].text.strip()
                 # print(city)
@@ -112,15 +109,6 @@ def get_data_condo(url):
             else:
                 area = ''
         else:
-            try:
-                condo_name = soup.find('div', {'class': 'row top-navigation-bar add-padding'}).find('a').text.strip()
-            except:
-                condo_name = ''
-            try:
-                developer_name = soup.find('div', {'class': 'col-sm-6 nav-top-btngroups text-right'}).find('li').find(
-                    'p').text.strip()
-            except:
-                developer_name = ''
             """
             locations = soup.find('div', {'class': 'locations'}).find('small').text.strip()
             try:
@@ -130,8 +118,14 @@ def get_data_condo(url):
                 city = ''
             area = " ".join(soup.find('ol', {'class': 'breadcrumb'}).find_all('li')[-2].text.split())
             """
-            breadcrumbs = soup.find('ol', {'class': 'breadcrumb'}).find_all('li')
-            province = breadcrumbs[3].text.strip()
+            try:            
+                breadcrumbs = soup.find('ol', {'class': 'breadcrumb'}).find_all('li')
+            except:
+                breadcrumbs = ''
+            try:
+                province = breadcrumbs[3].text.strip()
+            except:
+                province = ''
             if len(breadcrumbs) > 5:
                 city = breadcrumbs[4].text.strip()
             else:
@@ -142,6 +136,15 @@ def get_data_condo(url):
                 area = ''
 
         try:
+            try:
+                condo_name = soup.find('div', {'class': 'row top-navigation-bar add-padding'}).find('a').text.strip()
+            except:
+                condo_name = ''
+            try:
+                developer_name = soup.find('div', {'class': 'col-sm-6 nav-top-btngroups text-right'}).find('li').find(
+                    'p').text.strip()
+            except:
+                developer_name = ''
             # total_units = soup.find('div', {'class': 'col-md-12 col-lg-8 project-content'}).find('section').text.strip().split('contains ')[1].split(' total')[0]
             total_units_raw = \
             soup.find('div', {'class': 'col-md-12 col-lg-8 project-content'}).find('section').text.strip().split(
@@ -521,6 +524,7 @@ def get_data_graph(url):
             median_rent_price_sqm = ''
         try:
             earliest_median_rent_prices_sqm = data.split("'sqmRent': {")[1].split("data:[")[1].split("],")[0].split(',')
+            # print(earliest_median_rent_prices_sqm)
             if earliest_median_rent_prices_sqm is None:
                 earliest_median_rent_prices_sqm = ''
         except:
@@ -533,6 +537,7 @@ def get_data_graph(url):
             median_sale_price_sqm = ''
         try:
             earliest_median_sale_prices_sqm = data.split("'sqmSale': {")[1].split("data:[")[1].split("],")[0].split(',')
+            # print(earliest_median_sale_prices_sqm)
             if earliest_median_sale_prices_sqm is None:
                 earliest_median_sale_prices_sqm = ''
         except:
@@ -546,6 +551,7 @@ def get_data_graph(url):
             if earliest_median_sale_prices_sqm == '':
                 raise Exception
             month_num = 0
+            # print(earliest_median_sale_prices_sqm)
             for price in earliest_median_sale_prices_sqm:
                 month_num += 1
                 if price != '':
@@ -565,6 +571,7 @@ def get_data_graph(url):
             if earliest_median_rent_prices_sqm == '':
                 raise Exception
             month_num = 0
+            # print(earliest_median_rent_prices_sqm)
             for price in earliest_median_rent_prices_sqm:
                 month_num += 1
                 if price != '' and price is not None:

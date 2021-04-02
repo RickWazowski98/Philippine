@@ -51,24 +51,14 @@ def resolve_graph_link(url_str):
     # TODO: add domain in config
     if input_tab_name == "Vietnam townhouses":
         try:
-            if '/houses-for-rent/' in url_str:
-                provinces_cities_areas = url_str.split('/houses-for-rent/')[1]
-                url = f"https://www.{mapping_config['domain']}/market-stats/search-page/house/?key={provinces_cities_areas}&priceType=sqmSale&pageType=rent"
-            if '/houses-for-sale/' in url_str:
-                provinces_cities_areas = url_str.split('/houses-for-sale/')[1]
-                url = f"https://www.{mapping_config['domain']}/market-stats/search-page/house/?key={provinces_cities_areas}&priceType=sqmSale&pageType=rent"
+            print(url_str)
+            print(url_str.split('/townhouses-for-sale/')[1])
             if '/townhouses-for-rent/' in url_str:
                 provinces_cities_areas = url_str.split('/townhouses-for-rent/')[1]
-                url = f"https://www.{mapping_config['domain']}/market-stats/search-page/townhouses/?key={provinces_cities_areas}&priceType=sqmSale&pageType=rent"
+                url = f"https://www.{mapping_config['domain']}/market-stats/search-page/townhouse/?key={provinces_cities_areas}&priceType=sqmSale&pageType=rent"
             if '/townhouses-for-sale/' in url_str:
                 provinces_cities_areas = url_str.split('/townhouses-for-sale/')[1]
-                url = f"https://www.{mapping_config['domain']}/market-stats/search-page/townhouses/?key={provinces_cities_areas}&priceType=sqmSale&pageType=rent"
-            if '/condos-for-rent/' in url_str:
-                provinces_cities_areas = url_str.split('/condos-for-rent/')[1]
-                url = f"https://www.{mapping_config['domain']}/market-stats/search-page/condo/?key={provinces_cities_areas}&priceType=sqmSale&pageType=rent"
-            if 'condos-for-sale/' in url_str:
-                provinces_cities_areas = url_str.split('/condos-for-sale/')[1]
-                url = f"https://www.{mapping_config['domain']}/market-stats/search-page/condo/?key={provinces_cities_areas}&priceType=sqmSale&pageType=rent"
+                url = f"https://www.{mapping_config['domain']}/market-stats/search-page/townhouse/?key={provinces_cities_areas}&priceType=sqmSale&pageType=rent"
             logger.debug(f"Resolve url: {url_str} - > \n\t {url}")
             return url
         except:
@@ -85,17 +75,16 @@ def resolve_graph_link(url_str):
                 url = f"https://www.{mapping_config['domain']}/en/market-stats/search-page/house/?key={provinces_cities_areas}&priceType=sqmSale&pageType=rent"
             if '/townhouses-for-rent/' in url_str:
                 provinces_cities_areas = url_str.split('/townhouses-for-rent/')[1]
-                url = f"https://www.{mapping_config['domain']}/en/market-stats/search-page/townhouses/?key={provinces_cities_areas}&priceType=sqmSale&pageType=rent"
+                url = f"https://www.{mapping_config['domain']}/en/market-stats/search-page/townhouse/?key={provinces_cities_areas}&priceType=sqmSale&pageType=rent"
             if '/townhouses-for-sale/' in url_str:
                 provinces_cities_areas = url_str.split('/townhouses-for-sale/')[1]
-                url = f"https://www.{mapping_config['domain']}/en/market-stats/search-page/townhouses/?key={provinces_cities_areas}&priceType=sqmSale&pageType=rent"
+                url = f"https://www.{mapping_config['domain']}/en/market-stats/search-page/townhouse/?key={provinces_cities_areas}&priceType=sqmSale&pageType=rent"
             if '/condos-for-rent/' in url_str:
                 provinces_cities_areas = url_str.split('/condos-for-rent/')[1]
                 url = f"https://www.{mapping_config['domain']}/en/market-stats/search-page/condo/?key={provinces_cities_areas}&priceType=sqmSale&pageType=rent"
             if 'condos-for-sale/' in url_str:
                 provinces_cities_areas = url_str.split('/condos-for-sale/')[1]
                 url = f"https://www.{mapping_config['domain']}/en/market-stats/search-page/condo/?key={provinces_cities_areas}&priceType=sqmRent&pageType=rent"
-
             if '/townhouse-for-rent/' in url_str:
                 provinces_cities_areas = url_str.split('/townhouse-for-rent/')[1]
                 url = f"https://www.{mapping_config['domain']}/en/market-stats/search-page/townhouse/?key={provinces_cities_areas}&priceType=sqmSale&pageType=rent"
@@ -195,7 +184,6 @@ def get_data_graph(url, month_target_1, month_target_2):
         return '', '', '', ''
 
 if __name__ == "__main__":
-
     months_target_1 = wks.get_col(int(config['googlesheets']['dt_sheets_col_target_month_1']), include_tailing_empty=False)[1:][:1000]
     logger.debug(f"months_target_1 {len(months_target_1)}")
     months_target_2 = wks.get_col(int(config['googlesheets']['dt_sheets_col_target_month_2']), include_tailing_empty=False)[1:][:1000]
@@ -217,12 +205,12 @@ if __name__ == "__main__":
     # print(result)
     for data in result:
         #print(f"{data} - {data[0]} - {data[1]} - {data[2]} - {data[3]}")
-        if data != '' and data is not None:
+        if data == '' or data is None:
+            data_for_column_AO.append(['', ''])
+            data_for_column_CJ.append(['', ''])
+        else:
             data_for_column_AO.append([data[0], data[1]])
             data_for_column_CJ.append([data[2], data[3]])
-        else:
-            data_for_column_AO.append(['', ''])
-            data_for_column_CJ.append(['', '', '', ''])
 
     # r_url = resolve_graph_link(URLs_targets[0])
     # data = get_data_graph(r_url, months_target_1[0], months_target_2[0])
@@ -249,11 +237,11 @@ if __name__ == "__main__":
     # logger.debug(data_for_column_AO)
     #print(data_for_column_AO)
     #print(data_for_column_CJ)
-    if len(data_for_column_AO) != 0:
+    if len(data_for_column_AO):
         wks.update_values(crange=config['googlesheets']['dt_sheets_load_range_bulk_5'], values=data_for_column_AO)
     else:
         logger.debug('Nothing to load')
-    if len(data_for_column_CJ) != 0:
+    if len(data_for_column_CJ):
         wks.update_values(crange=config['googlesheets']['dt_sheets_load_range_bulk_6'], values=data_for_column_CJ)
     else:
         logger.debug('Nothing to load')
