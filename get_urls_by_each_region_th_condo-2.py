@@ -25,7 +25,7 @@ SHEET1 = 'Bangkok district URLs (condominiums)' # config['googlesheets']['sheet1
 
 gc = pygsheets.authorize(service_file=SERVICE_FILE)
 # sh = gc.open(SHEET_NAME)
-sh = gc.open_by_url('https://docs.google.com/spreadsheets/d/1Hd-WbIN20-hj_7ZzEGcSbxG08kBuAlTlejYDE7pcMuI/edit#gid=589501000')
+sh = gc.open_by_url('https://docs.google.com/spreadsheets/d/1BECEt_FXEofM-HvKM00R660PIbbaYEN5uCRPp73QI3I/edit?ts=6065beee#gid=589501000')
 wks = sh.worksheet_by_title(SHEET1)
 
 # TODO: Backup save?
