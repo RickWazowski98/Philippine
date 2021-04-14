@@ -6,7 +6,7 @@ def get_proxy():
     username = "81ztb0hcg6er357"
     password = "UlaniAt2YrbGYpbV"
     country_param = "_country-Indonesia"
-    http_proxy = f"http://{username}:{password}{country_param}@{host}:{port}"
+    http_proxy = "http://{}:{}{}@{}:{}".format(username, password, country_param, host, port)
 
     proxy_dict = {
         "http": http_proxy,
