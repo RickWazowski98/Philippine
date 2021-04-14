@@ -16,9 +16,9 @@ args = my_parser.parse_args()
 input_tab_name = args.tn
 
 basedir = os.path.dirname(__file__)
-logfile = os.path.join(basedir, "logs", f"{input_tab_name.replace(' ','_').lower()}_args_dt_load_to_sheet.log")
+logfile = os.path.join(basedir, "logs", "{}_args_dt_load_to_sheet.log".format(input_tab_name.replace(' ','_').lower()))
 logger.add(logfile, rotation="10 MB")
-logger.debug(f"Started {input_tab_name}")
+logger.debug("Started {}".format(input_tab_name))
 
 with open("config.yml", 'r') as ymlfile:
     config = yaml.load(ymlfile)
@@ -48,7 +48,7 @@ wks.clear(start=config['googlesheets']['dt_sheets_load_range_bulk_6'], end=confi
 
 
 
-file_object = open(f"data/{mapping_config['file_data_bulk_1']}.json", 'r')
+file_object = open("data/{}.json".format(mapping_config['file_data_bulk_1']), 'r')
 projects_data = json.load(file_object)
 # print(projects_data)
 values_mat = []
@@ -59,7 +59,7 @@ for project in projects_data:
 wks.update_values(crange=config['googlesheets']['dt_sheets_load_range_bulk_1'], values=values_mat)
 
 
-file_object = open(f"data/{mapping_config['file_data_bulk_2']}.json", 'r')
+file_object = open("data/{}.json".format(mapping_config['file_data_bulk_2']), 'r')
 projects_data = json.load(file_object)
 
 values_mat = []
@@ -70,7 +70,7 @@ for project in projects_data:
 wks.update_values(crange=config['googlesheets']['dt_sheets_load_range_bulk_2'], values=values_mat)
 
 
-file_object = open(f"data/{mapping_config['file_data_bulk_3']}.json", 'r')
+file_object = open("data/{}.json".format(mapping_config['file_data_bulk_3']), 'r')
 projects_data = json.load(file_object)
 
 values_mat = []
@@ -81,7 +81,7 @@ for project in projects_data:
 wks.update_values(crange=config['googlesheets']['dt_sheets_load_range_bulk_3'], values=values_mat)
 
 
-file_object = open(f"data/{mapping_config['file_data_bulk_3']}_4.json", 'r')
+file_object = open("data/{}_4.json".format(mapping_config['file_data_bulk_3']), 'r')
 projects_data = json.load(file_object)
 
 values_mat = []
@@ -91,7 +91,7 @@ for project in projects_data:
 
 wks.update_values(crange=config['googlesheets']['dt_sheets_load_range_bulk_3_4'], values=values_mat)
 
-file_object = open(f"data/{mapping_config['file_data_bulk_3']}_5.json", 'r')
+file_object = open("data/{}_5.json".format(mapping_config['file_data_bulk_3']), 'r')
 projects_data = json.load(file_object)
 
 values_mat = []
@@ -110,5 +110,5 @@ wks.update_value(config['googlesheets']['dt_sheets_identifer_trigger_end_part1']
 
 # wait here 5-10 mins
 wait_time_min = 1
-logger.debug(f"Just waiting after load, mins: {wait_time_min}...")
+logger.debug("Just waiting after load, mins: {}...".format(wait_time_min))
 time.sleep(wait_time_min*60)

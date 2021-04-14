@@ -20,9 +20,9 @@ args = my_parser.parse_args()
 input_tab_name = args.tn
 
 basedir = os.path.dirname(__file__)
-logfile = os.path.join(basedir, "logs", f"{input_tab_name.replace(' ', '_').lower()}_args_dt_dotproperty-1.log")
+logfile = os.path.join(basedir, "logs", "{}_args_dt_dotproperty-1.log".format(input_tab_name.replace(' ', '_').lower()))
 logger.add(logfile, rotation="10 MB")
-logger.debug(f"Started {input_tab_name}")
+logger.debug("Started {}".format(input_tab_name))
 
 with open("config.yml", 'r') as ymlfile:
     config = yaml.load(ymlfile)
@@ -38,7 +38,7 @@ sh = gc.open_by_url('https://docs.google.com/spreadsheets/d/1BECEt_FXEofM-HvKM00
 wks = sh.worksheet_by_title('Filters')
 
 try:
-    filter_values = wks.get_values(f"B{int(mapping_config['filter_row'])}", f"AC{int(mapping_config['filter_row'])}",
+    filter_values = wks.get_values("B{}".format(int(mapping_config['filter_row'])), "AC{}".format(int(mapping_config['filter_row'])),
                                    include_tailing_empty=True)[0]
     # logger.debug(filter_values)
     filter_values_int = []
@@ -52,7 +52,7 @@ except Exception as e:
     logger.debug(e)
     filter_values_int = [[] for x in range(30)]
 
-logger.debug(f'filter_values: {filter_values_int}, len:{len(filter_values_int)}')
+logger.debug('filter_values: {}, len:{}'.format(filter_values_int, len(filter_values_int)))
 
 
 def get_data_condo(url):
@@ -82,15 +82,6 @@ def get_data_condo(url):
             vi_r = session.get(vi_url, headers=headers, timeout=20)
             # print(vi_url)
             vi_soup = BeautifulSoup(vi_r.content, 'html.parser')
-            """
-            locations = vi_soup.find('div', {'class': 'locations'}).find('small').text.strip()
-            try:
-                city, province = locations.split(', ')
-            except ValueError:
-                province = locations
-                city = ''
-            area = " ".join(vi_soup.find('ol', {'class': 'breadcrumb'}).find_all('li')[-2].text.split())
-            """
             try:
                 breadcrumbs = vi_soup.find('ol', {'class': 'breadcrumb'}).find_all('li')
             except:
@@ -109,15 +100,6 @@ def get_data_condo(url):
             else:
                 area = ''
         else:
-            """
-            locations = soup.find('div', {'class': 'locations'}).find('small').text.strip()
-            try:
-                city, province = locations.split(', ')
-            except ValueError:
-                province = locations
-                city = ''
-            area = " ".join(soup.find('ol', {'class': 'breadcrumb'}).find_all('li')[-2].text.split())
-            """
             try:            
                 breadcrumbs = soup.find('ol', {'class': 'breadcrumb'}).find_all('li')
             except:
@@ -159,25 +141,13 @@ def get_data_condo(url):
             units_for_rent = soup.find('a', {'id': 'open-tab-rent'}).text.strip().split(' ')[0]
         except:
             units_for_rent = ''
-        """
-        try:
-            start_from_block = soup.find('div', {'class': 'header-line-3'})
-            if start_from_block.find('a', {'id':'open-tab-rent'}):
-                start_from_str = start_from_block.find_all('span', {'class': 'txt-orange'})[-1].text.strip()
-                start_from = start_from_str.split('from ')[1]
-                start_from = clear_ph_peso(start_from)
-            else:
-                start_from = ''
-        except:
-            start_from = ''
-        """
+
         number_of_studios = scrape_room_types_prices(soup)
         start_from, sqm = scrape_rent_units_listing(soup)
         lowest_ask_price, sqm_ask = scrape_rent_sale_listing(soup)
         other_projects_nearby = scrape_other_projects_nearby(soup)
         popular_condos_in_area = scrape_popular_condos_in_area(soup)
         room_types_prices = scrape_room_types_prices_ext(soup)
-        # print("other_projects_nearby", other_projects_nearby)
 
         s_n_of_units_for_rent, s_av_rent, s_av_ask_price, bd1_n_of_units_for_rent, bd1_av_rent, bd1_av_ask_price, bd2_n_of_units_for_rent, bd2_av_rent, bd2_av_ask_price, bd3_n_of_units_for_rent, bd3_av_rent, bd3_av_ask_price, bd4_n_of_units_for_rent, bd4_av_rent, bd4_av_ask_price = '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''
         s_n_of_units_for_sale, bd1_n_of_units_for_sale, bd2_n_of_units_for_sale, bd3_n_of_units_for_sale, bd4_n_of_units_for_sale = '', '', '', '', ''
@@ -214,11 +184,6 @@ def get_data_condo(url):
                 bd4_av_rent = t['average rent']
                 bd4_av_ask_price = t['average ask price']
                 bd4_n_of_units_for_sale = t['number of units for sale']
-
-        # logger.debug(condo_name, developer_name, city, province, area, total_units, units_for_rent, number_of_studios, start_from, sqm)
-        # logger.debug(lowest_ask_price, sqm_ask)
-        # logger.debug(other_projects_nearby)
-        # logger.debug(popular_condos_in_area)
 
         graph_link = resolve_graph_link(url)
         # logger.debug(graph_link)
@@ -314,20 +279,6 @@ def get_data_condo(url):
 
 
 def scrape_room_types_prices(soup):
-    # 23 Oct: Can you do this one too? Please return "Studio" if there is a studio unit for sale. If not, please return "1BR" if there is a 1BR unit for sale. If also not, please return nothing.
-    """
-    try:
-        table = soup.find('div', {'class': 'container-table'}).find_all('div', {'class': 'column text-center'})
-        for row in table:
-            type_name = row.find('div', {'class': 'cell'}).text.strip()
-            if type_name == 'Studio' or '1 Bedroom':
-                return row.find_all('div', {'class': 'cell'})[-1].text.strip().split('For rent:')[1].split('(')[1].split('unit')[0].strip()
-
-        return 0
-    
-    except:
-        return ''
-    """
     try:
         table = soup.find('div', {'class': 'container-table'}).find_all('div', {'class': 'column text-center'})
         for row in table:
@@ -488,8 +439,6 @@ def scrape_room_types_prices_ext(soup):
             })
             result.append(row_dict)
 
-    # logger.debug('---DEBUG---')
-    # logger.debug(result, len(result))
     return result
 
 
@@ -656,27 +605,17 @@ def resolve_graph_link(url_project):
         id = url_project.split('/townhouses/')[1].split('/')[0]
     if id != None:
         if input_tab_name == "Vietnam townhouses":
-            url = f"https://www.{mapping_config['domain']}/market-stats/project-page/condo/?key={id}"
+            url = "https://www.{}/market-stats/project-page/condo/?key={}".format(mapping_config['domain'], id)
             logger.debug(url)
             return url
         else:
-            url = f"https://www.{mapping_config['domain']}/en/market-stats/project-page/condo/?key={id}"
+            url = "https://www.{}/en/market-stats/project-page/condo/?key={}".format(mapping_config['domain'], id)
             return url
     logger.debug('WARNING: cant resolve graph_link for market stats')
     return ''
 
 
 def check_outlier(num_or_spare, number_less, number_more=None):
-    # (num_or_spare, digits_less, digits_more=None):
-    # temporarily turn off the filter
-    """
-    if num_or_spare != '':
-        if len(str(num_or_spare)) < digits_less:
-            return ''
-        if digits_more:
-            if len(str(num_or_spare)) > digits_more:
-                return ''
-    """
     try:
         if num_or_spare == '':
             return num_or_spare
@@ -701,18 +640,13 @@ def check_outlier(num_or_spare, number_less, number_more=None):
 
 
 if __name__ == "__main__":
-    # get_data_condo('https://www.dotproperty.co.th/en/condo/16601/modiz-rhyme')
-    file_object = open(f"data/{mapping_config['file_proj_urls']}.json", 'r')
+    file_object = open("data/{}.json".format(mapping_config['file_proj_urls']), 'r')
     links = json.load(file_object)
     pool = ThreadPool(20)
     result = pool.map(get_data_condo, links)
     pool.close()
     pool.join()
     time.sleep(5)
-    #result = []
-    #var = get_data_condo(links[0])
-    #result.append(var)
-    #print(result[0][0])
     bulk1, bulk2, bulk3, bulk4, bulk5 = [], [], [], [], []
     for data in result:
         
@@ -730,7 +664,6 @@ if __name__ == "__main__":
             else:
                 bulk3.append({})
             if data[3] is not None and data[3] != '':
-                #print(f"{data[3]}")
                 bulk4.append(data[3])
             else:
                 bulk4.append({})
@@ -745,27 +678,17 @@ if __name__ == "__main__":
             bulk4.append({})
             bulk5.append({})
 
-    with open(f"data/{mapping_config['file_data_bulk_1']}.json", "w+") as file_obj:
+    with open("data/{}.json".format(mapping_config['file_data_bulk_1']), "w+") as file_obj:
         json.dump(bulk1, file_obj, indent=4)
     # time.sleep(1)
-    with open(f"data/{mapping_config['file_data_bulk_2']}.json", "w+") as file_obj:
+    with open("data/{}.json".format(mapping_config['file_data_bulk_2']), "w+") as file_obj:
         json.dump(bulk2, file_obj, indent=4)
     # time.sleep(1)
-    with open(f"data/{mapping_config['file_data_bulk_3']}.json", "w+") as file_obj:
+    with open("data/{}.json".format(mapping_config['file_data_bulk_3']), "w+") as file_obj:
         json.dump(bulk3, file_obj, indent=4)
     # time.sleep(1)
-    with open(f"data/{mapping_config['file_data_bulk_3']}_4.json", "w+") as file_obj:
+    with open("data/{}_4.json".format(mapping_config['file_data_bulk_3']), "w+") as file_obj:
         json.dump(bulk4, file_obj, indent=4)
     # time.sleep(1)
-    with open(f"data/{mapping_config['file_data_bulk_3']}_5.json", "w+") as file_obj:
+    with open("data/{}_5.json".format(mapping_config['file_data_bulk_3']), "w+") as file_obj:
         json.dump(bulk5, file_obj, indent=4)
-
-        # graph_link = resolve_graph_link(link)
-        # logger.debug(graph_link)
-        # get_data_graph(graph_link)
-
-        # time.sleep(1)
-
-    # move it upper for write after each iteration
-    # file_object = open('data/projects_data.json', 'w')
-    # json.dump(result, file_object, indent=4)

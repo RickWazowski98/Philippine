@@ -28,9 +28,9 @@ args = my_parser.parse_args()
 input_tab_name = args.tn
 
 basedir = os.path.dirname(__file__)
-logfile = os.path.join(basedir, "logs", f"{input_tab_name.replace(' ','_').lower()}_args_dt_dotproperty-mix.log")
+logfile = os.path.join(basedir, "logs", "{}_args_dt_dotproperty-mix.log".format(input_tab_name.replace(' ','_').lower()))
 logger.add(logfile, rotation="10 MB")
-logger.debug(f"Started {input_tab_name}")
+logger.debug("Started {}".format(input_tab_name))
 
 with open("config.yml", 'r') as ymlfile:
     config = yaml.load(ymlfile)
@@ -55,11 +55,11 @@ def resolve_graph_link(url_str):
             print(url_str.split('/townhouses-for-sale/')[1])
             if '/townhouses-for-rent/' in url_str:
                 provinces_cities_areas = url_str.split('/townhouses-for-rent/')[1]
-                url = f"https://www.{mapping_config['domain']}/market-stats/search-page/townhouse/?key={provinces_cities_areas}&priceType=sqmSale&pageType=rent"
+                url = "https://www.{}/market-stats/search-page/townhouse/?key={}&priceType=sqmSale&pageType=rent".format(mapping_config['domain'], provinces_cities_areas)
             if '/townhouses-for-sale/' in url_str:
                 provinces_cities_areas = url_str.split('/townhouses-for-sale/')[1]
-                url = f"https://www.{mapping_config['domain']}/market-stats/search-page/townhouse/?key={provinces_cities_areas}&priceType=sqmSale&pageType=rent"
-            logger.debug(f"Resolve url: {url_str} - > \n\t {url}")
+                url = "https://www.{}/market-stats/search-page/townhouse/?key={}&priceType=sqmSale&pageType=rent".format(mapping_config['domain'], provinces_cities_areas)
+            logger.debug("Resolve url: {} - > \n\t {}".format(url_str, url))
             return url
         except:
             logger.debug('logging error in resolve_graph_link()')
@@ -69,29 +69,29 @@ def resolve_graph_link(url_str):
             #print(url_str)
             if '/houses-for-rent/' in url_str:
                 provinces_cities_areas = url_str.split('/houses-for-rent/')[1]
-                url = f"https://www.{mapping_config['domain']}/en/market-stats/search-page/house/?key={provinces_cities_areas}&priceType=sqmSale&pageType=rent"
+                url = "https://www.{}/en/market-stats/search-page/house/?key={}&priceType=sqmSale&pageType=rent".format(mapping_config['domain'], provinces_cities_areas)
             if '/houses-for-sale/' in url_str:
                 provinces_cities_areas = url_str.split('/houses-for-sale/')[1]
-                url = f"https://www.{mapping_config['domain']}/en/market-stats/search-page/house/?key={provinces_cities_areas}&priceType=sqmSale&pageType=rent"
+                url = "https://www.{}/en/market-stats/search-page/house/?key={}&priceType=sqmSale&pageType=rent".format(mapping_config['domain'], provinces_cities_areas)
             if '/townhouses-for-rent/' in url_str:
                 provinces_cities_areas = url_str.split('/townhouses-for-rent/')[1]
-                url = f"https://www.{mapping_config['domain']}/en/market-stats/search-page/townhouse/?key={provinces_cities_areas}&priceType=sqmSale&pageType=rent"
+                url = "https://www.{}/en/market-stats/search-page/townhouse/?key={}&priceType=sqmSale&pageType=rent".format(mapping_config['domain'], provinces_cities_areas)
             if '/townhouses-for-sale/' in url_str:
                 provinces_cities_areas = url_str.split('/townhouses-for-sale/')[1]
-                url = f"https://www.{mapping_config['domain']}/en/market-stats/search-page/townhouse/?key={provinces_cities_areas}&priceType=sqmSale&pageType=rent"
+                url = "https://www.{}/en/market-stats/search-page/townhouse/?key={}&priceType=sqmSale&pageType=rent".format(mapping_config['domain'], provinces_cities_areas)
             if '/condos-for-rent/' in url_str:
                 provinces_cities_areas = url_str.split('/condos-for-rent/')[1]
-                url = f"https://www.{mapping_config['domain']}/en/market-stats/search-page/condo/?key={provinces_cities_areas}&priceType=sqmSale&pageType=rent"
+                url = "https://www.{}/en/market-stats/search-page/condo/?key={}&priceType=sqmSale&pageType=rent".format(mapping_config['domain'], provinces_cities_areas)
             if 'condos-for-sale/' in url_str:
                 provinces_cities_areas = url_str.split('/condos-for-sale/')[1]
-                url = f"https://www.{mapping_config['domain']}/en/market-stats/search-page/condo/?key={provinces_cities_areas}&priceType=sqmRent&pageType=rent"
+                url = "https://www.{}/en/market-stats/search-page/condo/?key={}&priceType=sqmRent&pageType=rent".format(mapping_config['domain'], provinces_cities_areas)
             if '/townhouse-for-rent/' in url_str:
                 provinces_cities_areas = url_str.split('/townhouse-for-rent/')[1]
-                url = f"https://www.{mapping_config['domain']}/en/market-stats/search-page/townhouse/?key={provinces_cities_areas}&priceType=sqmSale&pageType=rent"
+                url = "https://www.{}/en/market-stats/search-page/townhouse/?key={}&priceType=sqmSale&pageType=rent".format(mapping_config['domain'], provinces_cities_areas)
             if '/townhouse-for-sale/' in url_str:
                 provinces_cities_areas = url_str.split('/townhouse-for-sale/')[1]
-                url = f"https://www.{mapping_config['domain']}/en/market-stats/search-page/townhouse/?key={provinces_cities_areas}&priceType=sqmSale&pageType=rent"
-            logger.debug(f"Resolve url: {url_str} - > \n\t {url}")
+                url = "https://www.{}/en/market-stats/search-page/townhouse/?key={}&priceType=sqmSale&pageType=rent".format(mapping_config['domain'], provinces_cities_areas)
+            logger.debug("Resolve url: {} - > \n\t {}".format(url_str, url))
             return url
         except Exception as err:
             logger.debug(err)
@@ -127,7 +127,7 @@ def get_data_graph(url, month_target_1, month_target_2):
         try:
             months = data.split("labels: [")[1].split("],")[0].split(",")
             months = [x.replace('"','') for x in months]
-            logger.debug(f"months {len(months)}")
+            logger.debug("months {}".format(len(months)))
 
             target_month_position = months.index(month_target_1)
             logger.debug(target_month_position)
@@ -184,17 +184,15 @@ def get_data_graph(url, month_target_1, month_target_2):
         return '', '', '', ''
 
 if __name__ == "__main__":
-    months_target_1 = wks.get_col(int(config['googlesheets']['dt_sheets_col_target_month_1']), include_tailing_empty=False)[1:][:1000]
-    logger.debug(f"months_target_1 {len(months_target_1)}")
-    months_target_2 = wks.get_col(int(config['googlesheets']['dt_sheets_col_target_month_2']), include_tailing_empty=False)[1:][:1000]
-    logger.debug(f"months_target_2 {len(months_target_2)}")
-    URLs_targets = wks.get_col(int(config['googlesheets']['dt_sheets_col_target_URLs_2']), include_tailing_empty=False)[1:][:1000]
-    logger.debug(f"URLs_targets {len(URLs_targets)}")
+    months_target_1 = wks.get_col(int(config['googlesheets']['dt_sheets_col_target_month_1']), include_tailing_empty=False)[1:]
+    logger.debug("months_target_1 {}".format(len(months_target_1)))
+    months_target_2 = wks.get_col(int(config['googlesheets']['dt_sheets_col_target_month_2']), include_tailing_empty=False)[1:]
+    logger.debug("months_target_2 {}".format(len(months_target_2)))
+    URLs_targets = wks.get_col(int(config['googlesheets']['dt_sheets_col_target_URLs_2']), include_tailing_empty=False)[1:]
+    logger.debug("URLs_targets {}".format(len(URLs_targets)))
     data_for_column_AO = []
     data_for_column_CJ = []
     graph_urls = []
-    # print(months_target_1)
-    # print(months_target_2)
 
     for url in URLs_targets:
         r = resolve_graph_link(url)
@@ -204,7 +202,6 @@ if __name__ == "__main__":
     result = pool.starmap(get_data_graph, source_data)
     # print(result)
     for data in result:
-        #print(f"{data} - {data[0]} - {data[1]} - {data[2]} - {data[3]}")
         if data == '' or data is None:
             data_for_column_AO.append(['', ''])
             data_for_column_CJ.append(['', ''])
@@ -212,31 +209,6 @@ if __name__ == "__main__":
             data_for_column_AO.append([data[0], data[1]])
             data_for_column_CJ.append([data[2], data[3]])
 
-    # r_url = resolve_graph_link(URLs_targets[0])
-    # data = get_data_graph(r_url, months_target_1[0], months_target_2[0])
-    # print(data)
-    # j = 1
-    # for month_1, month_2, url in zip(months_target_1, months_target_2, URLs_targets):
-    #     logger.debug(f"{j}/{len(URLs_targets)}")
-    #     logger.debug('-- {} -- {} -- {}'.format(month_1, month_2, url))
-    #     # if month_1 != '' or month_2 != '':
-    #     url_graph = resolve_graph_link(url)
-    #     if url_graph:
-    #         result = get_data_graph(url_graph, month_1, month_2)
-    #         data_for_column_AO.append(result[:2])
-    #         data_for_column_CJ.append(result[2:4])
-    #     else:
-    #         data_for_column_AO.append(['', ''])
-    #         data_for_column_CJ.append(['', ''])
-    #     # else:
-    #     #     data_for_column_AO.append(['', ''])
-    #
-    #     j += 1
-    #     # time.sleep(1)
-    # logger.debug('========')
-    # logger.debug(data_for_column_AO)
-    #print(data_for_column_AO)
-    #print(data_for_column_CJ)
     if len(data_for_column_AO):
         wks.update_values(crange=config['googlesheets']['dt_sheets_load_range_bulk_5'], values=data_for_column_AO)
     else:

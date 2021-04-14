@@ -23,9 +23,9 @@ args = my_parser.parse_args()
 input_tab_name = args.tn
 
 basedir = os.path.dirname(__file__)
-logfile = os.path.join(basedir, "logs", f"{input_tab_name.replace(' ','_').lower()}_args_dt_dotproperty-2.log")
+logfile = os.path.join(basedir, "logs", "{}_args_dt_dotproperty-2.log".format(input_tab_name.replace(' ','_').lower()))
 logger.add(logfile, rotation="10 MB")
-logger.debug(f"Started {input_tab_name}")
+logger.debug("Started {}".format(input_tab_name))
 
 with open("config.yml", 'r') as ymlfile:
     config = yaml.load(ymlfile)
@@ -55,7 +55,7 @@ wks.update_col(int(config['googlesheets']['dt_sheets_copy_paste_location_urls'])
 time.sleep(30) # 30s ur safe I'd say
 
 result_urls = wks.get_col(int(config['googlesheets']['dt_sheets_location_urls']), include_tailing_empty=False)[1:]
-file_object = open(f"data/{mapping_config['file_data_urls_provinces']}.json", 'w')
+file_object = open("data/{}.json".format(mapping_config['file_data_urls_provinces']), 'w')
 json.dump(result_urls, file_object, indent=4)
 
 
@@ -78,11 +78,11 @@ def resolve_graph_link(url_str):
         provinces_cities_areas = url_str.split('/houses-for-sale/')[1]
     if provinces_cities_areas != None:
         if input_tab_name == "Vietnam townhouses":
-            url = f"https://www.{mapping_config['domain']}/market-stats/search-page/condo/?key={provinces_cities_areas}&priceType=sqmSale&pageType=rent"
+            url = "https://www.{}/market-stats/search-page/condo/?key={}&priceType=sqmSale&pageType=rent".format(mapping_config['domain'], provinces_cities_areas)
             logger.debug(url)
             return url
         else:
-            url = f"https://www.{mapping_config['domain']}/en/market-stats/search-page/condo/?key={provinces_cities_areas}&priceType=sqmSale&pageType=rent"
+            url = "https://www.{}/en/market-stats/search-page/condo/?key={}&priceType=sqmSale&pageType=rent".format(mapping_config['domain'], provinces_cities_areas)
             logger.debug(url)
             return url
     logger.debug('WARNING: cant resolve graph_link')
@@ -104,13 +104,7 @@ def get_data_graph(url):
         logger.debug('status_code {}'.format(r.status_code))
         return None
     data = r.json()['msg']
-    # filname to save temp for dev
-    """
-    f_name = url.split('/')[-1]
-    with open(f_name, 'w') as output:
-        output.write(data)
-    """
-    #print(data)
+
     try:
         median_rent_price_sqm = data.split("'sqmRent': {")[1].split("data:[")[1].split("],")[0].split(',')[-1]
     except:
@@ -208,7 +202,7 @@ def get_data_graph(url):
     return part_2_4, median_rent_price_sqm, part_2_3, earliest_median_rent_price_sqm, earliest_month_1, part_2_5, part_2_2, median_sale_price_sqm, part_2_1, earliest_median_sale_price_sqm, earliest_month
 
 if __name__ == "__main__":
-    file_object = open(f"data/{mapping_config['file_data_urls_provinces']}.json", 'r')
+    file_object = open("data/{}.json".format(mapping_config['file_data_urls_provinces']), 'r')
     links = json.load(file_object)
     pool = ThreadPool(20)
 
@@ -220,21 +214,18 @@ if __name__ == "__main__":
             r = resolve_graph_link(link)
         if r is not None and r != '':
             resolved_links.append(r)
-    # for link in resolved_links:
-    #     result_project = get_data_graph(link)
-    #     result.append(result_project)
+
     result = pool.map(get_data_graph, resolved_links)
     pool.close()
     pool.join()
     time.sleep(5)
-        # time.sleep(1)
-    #print(result)
-    file_object = open(f"data/{mapping_config['file_data_provinces']}.json", 'w')
+
+    file_object = open("data/{}.json".format(mapping_config['file_data_provinces']), 'w')
     json.dump(result, file_object, indent=4)
 
     # LOAD
-    file_object = open(f"data/{mapping_config['file_data_provinces']}.json", 'r')
+    file_object = open("data/{}.json".format(mapping_config['file_data_provinces']), 'r')
     provinces_data = json.load(file_object)
-    #print(provinces_data)
+
 
     wks.update_values(crange=config['googlesheets']['dt_sheets_load_range_bulk_4'], values=provinces_data)

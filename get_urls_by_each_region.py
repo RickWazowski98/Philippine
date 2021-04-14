@@ -40,7 +40,7 @@ def get_data_projects(urls):
     # result = []
     for url in urls:
         result = []
-        print(url)
+        # print(url)
         r = requests.get(url, headers=headers, timeout=20)
         if r.status_code != 200:
             print('status_code', r.status_code)
@@ -51,7 +51,7 @@ def get_data_projects(urls):
             number_of_projects = int(soup.find('span', {'id': 'properties_total'}).text)
         except:
             number_of_projects = 0
-        print('number_of_projects', number_of_projects)
+        # print('number_of_projects', number_of_projects)
         result.append(number_of_projects)
         
         if number_of_projects > 0:
@@ -59,7 +59,7 @@ def get_data_projects(urls):
                 count_pages = math.ceil(number_of_projects/20)
             except:
                 count_pages = 0
-            print('count_pages', count_pages)
+            # print('count_pages', count_pages)
 
             project_links = soup.find('div', {'id': 'search-results'}).find_all('a')
             
@@ -70,8 +70,8 @@ def get_data_projects(urls):
 
             if count_pages > 1:
                 for i in range(2, count_pages+1):
-                    url_n_page = f"{url}?page={i}"
-                    print(url_n_page)
+                    url_n_page = "{}?page={}".format(url, i)
+                    # print(url_n_page)
                     # https://www.dotproperty.co.th/en/condos/all/Chiang-Mai?page=2
                     r = requests.get(url_n_page, headers=headers, timeout=20)
                     if r.status_code != 200:
@@ -86,7 +86,7 @@ def get_data_projects(urls):
                             result.append(link['href'])
                             links_to_save.append(link['href'])
     
-        print(result, len(result))
+        # print(result, len(result))
         # post here
         wks.update_col(column_i, result, row_offset=2)
 
@@ -96,7 +96,7 @@ def get_data_projects(urls):
     # TODO: Save to file cont 
     file_object = open('data/links_th_prov_houses.json', 'w') # Thai province URLs (condominums)
     json.dump(links_to_save, file_object, indent=4)
-    print(len(links_to_save))
+    # print(len(links_to_save))
 
 
 if __name__ == "__main__":
