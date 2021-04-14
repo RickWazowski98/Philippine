@@ -174,7 +174,7 @@ def get_data_graph(url, month_target_1, month_target_2):
         #except:
         #    proj_media_sale_price_sqm_8_month_ago = ''
         
-        logger.debug(f'{r.url}:\n\t Result: {result1}; {result2}; {area_median_sale_price_sqm_1_year_ago}; {area_median_sale_price_sqm_8_month_ago};')  # {proj_media_sale_price_sqm_1_year_ago}; {proj_media_sale_price_sqm_8_month_ago}')
+        # logger.debug(f'{r.url}:\n\t Result: {result1}; {result2}; {area_median_sale_price_sqm_1_year_ago}; {area_median_sale_price_sqm_8_month_ago};')  # {proj_media_sale_price_sqm_1_year_ago}; {proj_media_sale_price_sqm_8_month_ago}')
         """
         The data in these columns should be interchanged, so the 3 digit numbers in here and the more than 5 -6 digit numbers in column CC
         """

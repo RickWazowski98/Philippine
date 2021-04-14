@@ -353,7 +353,7 @@ def scrape_rent_sale_listing(soup):
                     sqm = row.find_all('td')[1].text.split()[0].strip()
                     min_price = price_int
 
-        logger.debug(f'<><> scrape_rent_sale_listing: {min_price}, {sqm} <><>')
+        logger.debug('<><> scrape_rent_sale_listing: {}, {} <><>'.format(min_price, sqm))
         return min_price, sqm
 
     except:
